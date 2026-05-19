@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Executivo - Gestão Operacional 2026</title>
+  <style>
+    :root{
+      --bg:#0f1115;--panel:#171b22;--panel2:#202631;--panel3:#10151d;--text:#f7f7f7;--muted:#aab2bf;--line:#303744;--orange:#ff7a1a;--orange2:#d95700;--green:#2bd184;--red:#ff5b5b;--yellow:#ffd166;--blue:#73a7ff;
+    }
+    *{box-sizing:border-box}html,body{min-height:100%;margin:0;background:#0f1115;color:var(--text);font-family:Arial,Helvetica,sans-serif}body{background:linear-gradient(145deg,#171b22 0%,#0f1115 55%,#090a0d 100%);background-attachment:fixed}.hidden{display:none!important}
+    header{position:sticky;top:0;z-index:30;background:#11141a;border-bottom:1px solid var(--line);padding:18px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}h1{margin:0;font-size:23px;letter-spacing:.2px}h2{margin:0 0 14px;font-size:19px}h3{margin:0;font-size:16px}.sub,.muted{color:var(--muted);font-size:13px;line-height:1.35}.wrap{max-width:1520px;margin:0 auto;padding:22px 26px 48px}.panel,.card,.unitCard,.periodCard,.alertCard{background:rgba(23,27,34,.96);border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 30px rgba(0,0,0,.20)}.panel{padding:18px;margin-bottom:18px}.topline{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+    label{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}input,select,button{border-radius:13px;border:1px solid var(--line);padding:11px 12px;background:#0d1016;color:var(--text);outline:none;min-height:42px}input,select{width:100%}button{cursor:pointer;background:linear-gradient(135deg,var(--orange),var(--orange2));border:none;font-weight:850;white-space:nowrap}button.secondary{background:#252c38;border:1px solid var(--line)}button.ghost{background:transparent;border:1px solid var(--line);color:var(--muted)}.configRow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:end}.status{padding:13px 16px;margin-bottom:18px;border-radius:18px;border:1px solid var(--line);background:#141922;color:var(--muted);font-size:13px;white-space:pre-wrap}.ok{color:var(--green)}.err{color:var(--red)}
+    .filters{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:12px}.kpis{display:grid;grid-template-columns:repeat(6,minmax(150px,1fr));gap:14px;margin-bottom:18px}.card{padding:18px;min-height:120px}.card .label{color:var(--muted);font-size:13px}.card .value{font-size:25px;font-weight:950;margin-top:8px;line-height:1.08}.card .note{color:var(--muted);font-size:12px;margin-top:8px}.twoCols{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-bottom:18px}.dashGrid{display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:14px}.periodGrid{display:grid;grid-template-columns:repeat(4,minmax(205px,1fr));gap:14px}.unitCard,.periodCard,.alertCard{padding:16px}.unitHead,.rankLine,.line{display:flex;justify-content:space-between;gap:12px;align-items:center}.badge{font-size:11px;padding:6px 9px;border-radius:999px;background:#26303d;color:var(--muted);white-space:nowrap}.badge.good{background:var(--green);color:#092819;font-weight:900}.badge.bad{background:var(--red);color:#2d0909;font-weight:900}.badge.warn{background:var(--yellow);color:#332100;font-weight:900}.miniGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.mini{background:var(--panel3);border:1px solid #252d39;border-radius:13px;padding:10px}.mini .mLabel{color:var(--muted);font-size:11px}.mini .mValue{font-size:16px;font-weight:900;margin-top:5px}.barWrap{height:10px;border-radius:999px;background:#0c0f15;overflow:hidden;margin-top:12px;border:1px solid #252d39}.bar{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,var(--orange),#ffb15e)}.bar.green{background:linear-gradient(90deg,var(--green),#8df0bf)}.list{display:grid;gap:10px}.rankItem{background:var(--panel3);border:1px solid #252d39;border-radius:15px;padding:13px}.rankName{font-weight:900}.rankValue{font-weight:950;white-space:nowrap}.pillRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.pill{border:1px solid #313a48;background:#10151d;border-radius:999px;padding:7px 9px;color:var(--muted);font-size:12px}.periodCard .value{font-size:22px;font-weight:950;margin:7px 0 8px}.periodCard .line{padding-top:8px;color:var(--muted);font-size:12px}.periodCard .line b{color:#fff}.alertCard{background:#1b1713;border-color:rgba(255,122,26,.46)}.alertTitle{color:#ffd2b5;font-weight:950;margin-bottom:8px}.empty{grid-column:1/-1;color:var(--muted);padding:18px;border:1px dashed var(--line);border-radius:14px;background:#10141b}.smallStats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}.smallStats .pill{border-radius:12px;width:100%;text-align:center}.footerNote{color:var(--muted);font-size:12px;text-align:center;margin-top:20px}
+    @media(max-width:1180px){.kpis{grid-template-columns:repeat(3,1fr)}.dashGrid,.periodGrid{grid-template-columns:repeat(2,1fr)}.twoCols{grid-template-columns:1fr}.filters{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){header,.wrap{padding-left:16px;padding-right:16px}.configRow,.kpis,.dashGrid,.periodGrid,.filters,.smallStats{grid-template-columns:1fr}.card .value{font-size:23px}}
+  </style>
+</head>
+<body>
+<header>
+  <div><h1>Gestão Operacional 2026 — Eat Kitchen</h1><div class="sub">Dashboard executivo por período e unidade • sem visual de planilha • atualização a cada 2 horas</div></div>
+  <div class="sub" id="lastUpdate">Última atualização: -</div>
+</header>
+<div class="wrap">
+  <section class="panel" id="configPanel">
+    <div class="topline"><div><h2>Conexão com Google Sheets</h2><div class="muted">Cole a URL /exec do Apps Script. O navegador salva automaticamente.</div></div><button class="ghost" onclick="toggleConfig()">Mostrar/ocultar configuração</button></div>
+    <div id="configBody">
+      <label>URL do App da Web do Google Apps Script</label>
+      <div class="configRow"><input id="apiUrl" placeholder="Cole aqui a URL que termina com /exec"><button onclick="saveAndLoad()">Conectar</button><button class="secondary" onclick="loadData()">Atualizar manualmente</button></div>
+      <div class="muted" style="margin-top:10px">Atualiza sozinho a cada 2 horas. O botão manual força a atualização quando precisar.</div>
+    </div>
+  </section>
+  <div class="status" id="status">Cole a URL do Apps Script e clique em Conectar.</div>
+  <section class="panel">
+    <div class="topline"><div><h2>Filtros do dashboard</h2><div class="muted">Os períodos são lidos automaticamente das semanas e das abas mensais da planilha.</div></div><button class="secondary" onclick="loadData()">Atualizar manualmente</button></div>
+    <div class="filters">
+      <div><label>Unidade</label><select id="unitFilter" onchange="renderAll()"><option value="">Todas</option></select></div>
+      <div><label>Mês</label><select id="monthFilter" onchange="renderAll()"><option value="">Todos</option></select></div>
+      <div><label>Semana</label><select id="weekFilter" onchange="renderAll()"><option value="">Todas</option></select></div>
+      <div><label>Data inicial</label><input type="date" id="startDate" onchange="renderAll()"></div>
+      <div><label>Data final</label><input type="date" id="endDate" onchange="renderAll()"></div>
+    </div>
+  </section>
+  <section class="kpis">
+    <div class="card"><div class="label">Faturamento</div><div class="value" id="kpiRevenue">R$ 0</div><div class="note" id="kpiRevenueNote">Dados filtrados</div></div>
+    <div class="card"><div class="label">Meta</div><div class="value" id="kpiGoal">R$ 0</div><div class="note">Meta do período/unidade</div></div>
+    <div class="card"><div class="label">Atingimento</div><div class="value" id="kpiGoalPct">0%</div><div class="note">Faturamento ÷ meta</div></div>
+    <div class="card"><div class="label">PAX</div><div class="value" id="kpiPax">0</div><div class="note">Clientes / pessoas</div></div>
+    <div class="card"><div class="label">Ticket médio</div><div class="value" id="kpiTicket">R$ 0</div><div class="note">Faturamento ÷ PAX</div></div>
+    <div class="card"><div class="label">CMV</div><div class="value" id="kpiCmv">0%</div><div class="note">Percentual médio identificado</div></div>
+  </section>
+  <section class="twoCols">
+    <div class="panel"><div class="topline"><h2>Dashboard por unidade</h2><div class="muted" id="unitCount">-</div></div><div class="dashGrid" id="unitDashboard"></div></div>
+    <div class="panel"><h2>Ranking de unidades</h2><div class="list" id="rankingList"></div></div>
+  </section>
+  <section class="panel"><div class="topline"><h2>Dashboard por período</h2><div class="muted">Resumo por mês e por semana</div></div><div class="periodGrid" id="periodDashboard"></div></section>
+  <section class="panel"><div class="topline"><div><h2>Avaliações e reputação das unidades</h2><div class="muted">Notas, avaliações, ocorrências e indicadores de qualidade por unidade.</div></div><div class="muted">Google • Trip • iFood • Qualidade</div></div><div class="periodGrid" id="reviewsKpis"></div><div class="dashGrid" id="reviewsDashboard" style="margin-top:14px"></div></section>
+  <section class="panel"><div class="topline"><h2>Alertas e pontos de atenção</h2><div class="muted">Gerados automaticamente</div></div><div class="dashGrid" id="alertsDashboard"></div></section>
+  <div class="footerNote" id="debugInfo"></div>
+</div>
+<script>
+const DEFAULT_URL="";
+const AUTO_REFRESH_MS=2*60*60*1000;
+let rawData=null;
+let records=[];
+const UNITS=["NH","DINARTE","MOINHOS","CAIS","BARRA","JURERE","JURERÊ","EVENTOS","ADM"];
+const MONTHS={janeiro:1,jan:1,fevereiro:2,fev:2,marco:3,março:3,mar:3,abril:4,abr:4,maio:5,mai:5,junho:6,jun:6,julho:7,jul:7,agosto:8,ago:8,setembro:9,set:9,outubro:10,out:10,novembro:11,nov:11,dezembro:12,dez:12};
+function normalize(s){return String(s??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim()}
+function parseNumber(v){if(typeof v==="number")return isFinite(v)?v:0;if(v===null||v===undefined)return 0;let s=String(v).trim();if(!s||s==="-"||s==="#DIV/0!"||s==="#VALUE!")return 0;s=s.replace(/R\$/g,"").replace(/%/g,"").replace(/\s/g,"");const neg=s.includes("-");s=s.replace(/[^0-9,.-]/g,"");if(!s)return 0;if(s.includes(",")&&s.includes("."))s=s.replace(/\./g,"").replace(",",".");else if(s.includes(","))s=s.replace(",",".");const n=Number(s);if(!isFinite(n))return 0;return neg&&n>0?-n:n}
+function fmtMoney(n){return Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL",minimumFractionDigits:0,maximumFractionDigits:0})}
+function fmtNum(n){const x=Number(n||0),dec=!Number.isInteger(x);return x.toLocaleString("pt-BR",{minimumFractionDigits:dec?2:0,maximumFractionDigits:dec?2:0})}
+function fmtPct(n){return Number(n||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2})+"%"}
+function escapeHtml(v){return String(v??"").replace(/[&<>'"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]))}
+function setStatus(msg,type){const e=document.getElementById("status");e.textContent=msg;e.className="status "+(type||"")}
+function toggleConfig(){document.getElementById("configBody").classList.toggle("hidden")}
+function saveAndLoad(){const url=document.getElementById("apiUrl").value.trim();if(!url)return setStatus("Cole a URL do Apps Script primeiro.","err");localStorage.setItem("eatkitchen_api_url",url);loadData()}
+async function loadData(){const url=document.getElementById("apiUrl").value.trim()||localStorage.getItem("eatkitchen_api_url")||DEFAULT_URL;if(!url)return setStatus("Nenhuma URL configurada. Cole a URL que termina com /exec.","err");document.getElementById("apiUrl").value=url;setStatus("Atualizando dashboard com os dados da planilha...","");try{const finalUrl=url+(url.includes("?")?"&":"?")+"cache="+Date.now();const res=await fetch(finalUrl,{method:"GET",cache:"no-store"});const text=await res.text();if(!res.ok)throw new Error("HTTP "+res.status+" - "+text.slice(0,300));let json;try{json=JSON.parse(text)}catch(e){throw new Error("A resposta não é JSON. Confira se a URL é a /exec do Apps Script.")}if(!json||!json.abas)throw new Error("JSON sem objeto 'abas'. Confira o código do Apps Script.");rawData=json;localStorage.setItem("eatkitchen_api_url",url);document.getElementById("lastUpdate").textContent="Última atualização: "+(json.atualizadoEm||new Date().toLocaleString("pt-BR"));normalizeAll();buildFilters();renderAll();setStatus(`Conectado. ${records.length.toLocaleString("pt-BR")} indicadores consolidados em formato de dashboard.`,"ok")}catch(err){console.error(err);setStatus("Erro ao carregar os dados:\n"+err.message,"err")}}
+function rowValues(row){return Object.values(row||{})}
+function cellText(v){return String(v??"").trim()}
+function isBlank(v){return cellText(v)===""}
+function isUnit(s){const n=normalize(s).replace(/[^a-z0-9]/g,"");if(!n)return false;return ["nh","dinarte","moinhos","cais","barra","jurere","eventos","adm","total","media","média"].some(u=>n===normalize(u).replace(/[^a-z0-9]/g,""))||n.includes("nh500")||n.includes("dinarte500")||n.includes("cais500")||n.includes("barra500")||n.includes("jurere500")}
+function cleanUnit(s){let t=cellText(s).replace(/\s*-\s*\d+.*$/,"").trim();const n=normalize(t);if(n==="jurere")return "Jurerê";if(n==="moinhos")return "Moinhos";if(n==="total")return "Total";if(n==="media"||n==="média")return "Média";return t? t.charAt(0).toUpperCase()+t.slice(1):"Geral"}
+function parseDateValue(v){if(v instanceof Date&&!isNaN(v))return v;const s=cellText(v);if(!s)return null;let m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return new Date(Date.UTC(+m[1],+m[2]-1,+m[3]));m=s.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/);if(m){let y=+m[3];if(y<100)y+=2000;return new Date(Date.UTC(y,+m[2]-1,+m[1]))}return null}
+function parseMonthFromSheet(name){const n=normalize(name);for(const [k,m] of Object.entries(MONTHS)){if(n.includes(k)){return {year:2026,month:m,key:`2026-${String(m).padStart(2,"0")}`}}}return null}
+function parsePeriodRange(label,defaultYear=2026){const s=cellText(label).replace(/–/g,"-");const m=s.match(/(\d{1,2})\/(\d{1,2})\s*-\s*(\d{1,2})\/(\d{1,2})/);if(!m)return null;let y1=defaultYear,y2=defaultYear;const d1=+m[1],mo1=+m[2],d2=+m[3],mo2=+m[4];if(mo1===12&&mo2===1)y1=defaultYear-1;const start=new Date(Date.UTC(y1,mo1-1,d1));const end=new Date(Date.UTC(y2,mo2-1,d2));return {start,end,label:s,month:`${end.getUTCFullYear()}-${String(end.getUTCMonth()+1).padStart(2,"0")}`,week:s}}
+function monthLabel(key){if(!key||key==="Sem mês")return "Sem mês";const [y,m]=key.split("-").map(Number);return new Date(Date.UTC(y,m-1,1)).toLocaleDateString("pt-BR",{month:"long",year:"numeric",timeZone:"UTC"})}
+function getWeekLabel(date){if(!date)return "Sem semana";const d=new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate()));const day=d.getUTCDay()||7;d.setUTCDate(d.getUTCDate()+4-day);const yearStart=new Date(Date.UTC(d.getUTCFullYear(),0,1));const w=Math.ceil((((d-yearStart)/86400000)+1)/7);return d.getUTCFullYear()+"-S"+String(w).padStart(2,"0")}
+function metricFromLabel(label){
+  const n=normalize(label);
+  if(!n)return null;
+  if(n.includes("faturamento bruto")||n==="faturamento"||n.includes("total vendido"))return "faturamento";
+  if(n.includes("meta")&&!n.includes("atingido")&&!n.includes("falta")&&!n.includes("taxa de engajamento"))return "meta";
+  if(n.includes("pax"))return "pax";
+  if(n.includes("tm geral")||n==="tm"||n.includes("ticket"))return "ticket";
+  if(n.includes("cmv (%)")||n.includes("cmv %")||n.includes("cmc (%)"))return "cmv_pct";
+  if(n.includes("cmv")||n.includes("cmc"))return "cmv_valor";
+  if(n.includes("vendas delivery"))return "delivery";
+  if(n.includes("pedidos delivery")||n==="pedidos")return "pedidos_delivery";
+  if(n.includes("extras"))return "extras";
+  if(n.includes("turnover"))return "turnover";
+  if(n.includes("admis"))return "admissoes";
+  if(n.includes("demis"))return "demissoes";
+  if(n.includes("quadro")||n.includes("funcionarios")||n.includes("funcionários"))return "funcionarios";
+  if(n.includes("google - nota")||n.includes("google nota"))return "google_nota";
+  if(n.includes("google - avaliac")||n.includes("google avaliac"))return "google_avaliacoes";
+  if(n.includes("google - ocorr")||n.includes("google ocorr"))return "google_ocorrencias";
+  if(n.includes("trip - nota")||n.includes("trip nota"))return "trip_nota";
+  if(n.includes("trip - posicao")||n.includes("trip posicao"))return "trip_posicao";
+  if(n.includes("ifood - nota")||n.includes("ifood nota"))return "ifood_nota";
+  if(n.includes("ifood - ocorr")||n.includes("ifood ocorr"))return "ifood_ocorrencias";
+  if(n.includes("numero avaliacoes leads food")||n.includes("número avaliações leads food"))return "leads_food_avaliacoes";
+  if(n==="nps"||n.includes("nps"))return "nps";
+  if(n.includes("qualidade"))return "qualidade";
+  if(n.includes("elogios"))return "elogios";
+  if(n.includes("criticas")||n.includes("críticas"))return "criticas";
+  if(n.includes("engajamento"))return "engajamento";
+  return null;
+}
+function shouldKeepZero(metric){return ["meta","google_ocorrencias","ifood_ocorrencias","elogios","criticas"].includes(metric)}
+function addRecord({source,sheet,metric,unit,value,date,start,end,month,week,label}){
+  const v=parseNumber(value);
+  if(!metric||!isFinite(v))return;
+  if(v===0&&!shouldKeepZero(metric))return;
+  const clean=unit||"Geral";
+  records.push({source,sheet,metric,unit:clean,value:v,date:date||start||null,start:start||date||null,end:end||date||null,month:month||(date?`${date.getUTCFullYear()}-${String(date.getUTCMonth()+1).padStart(2,"0")}`:"Sem mês"),week:week||(date?getWeekLabel(date):"Sem semana"),label:label||week||month||""})
+}
+function normalizeAll(){records=[];const abas=rawData?.abas||{};Object.entries(abas).forEach(([sheetName,rows])=>{const matrix=(rows||[]).map(rowValues);parseDailySheet(sheetName,matrix);parseCrossTabSheet(sheetName,matrix)});}
+function parseDailySheet(sheetName,matrix){
+  const monthInfo=parseMonthFromSheet(sheetName);
+  let headerIdx=-1,headers=[];
+  for(let i=0;i<matrix.length;i++){
+    const vals=matrix[i].map(cellText);
+    if(vals.some(v=>normalize(v)==="data")&&vals.some(v=>normalize(v).includes("total"))){headerIdx=i;headers=vals;break}
+  }
+  if(headerIdx<0)return;
+  const dataCol=headers.findIndex(h=>normalize(h)==="data");
+  const totalCol=headers.findIndex(h=>normalize(h)==="total");
+  const unitCols=[];
+  headers.forEach((h,idx)=>{const n=normalize(h);if(idx>dataCol&&idx!==totalCol&&UNITS.some(u=>normalize(u)===n))unitCols.push({idx,unit:cleanUnit(h)})});
+  let metaRow=null,totalRow=null;
+  for(let i=headerIdx+1;i<matrix.length;i++){
+    const vals=matrix[i];
+    const firstNon=vals.map(cellText).find(x=>x);
+    const nf=normalize(firstNon);
+    if(nf.includes("meta")&&!nf.includes("atingido")&&!nf.includes("falta"))metaRow=vals;
+    if(nf.includes("total vendido"))totalRow=vals;
+    const date=parseDateValue(vals[dataCol]);
+    if(!date)continue;
+    unitCols.forEach(c=>addRecord({source:"daily",sheet:sheetName,metric:"faturamento",unit:c.unit,value:vals[c.idx],date,month:`${date.getUTCFullYear()}-${String(date.getUTCMonth()+1).padStart(2,"0")}`,week:getWeekLabel(date),label:date.toISOString().slice(0,10)}));
+    if(totalCol>=0)addRecord({source:"daily",sheet:sheetName,metric:"faturamento",unit:"Total",value:vals[totalCol],date,month:`${date.getUTCFullYear()}-${String(date.getUTCMonth()+1).padStart(2,"0")}`,week:getWeekLabel(date),label:date.toISOString().slice(0,10)})
+  }
+  // A planilha possui linha de total mensal. Ela é a fonte principal para o dashboard mensal,
+  // porque o total pode não ser simplesmente a soma das colunas de unidades/eventos.
+  if(totalRow){
+    unitCols.forEach(c=>addRecord({source:"daily_total",sheet:sheetName,metric:"faturamento",unit:c.unit,value:totalRow[c.idx],month:monthInfo?.key||"Sem mês",week:"Mês",label:"Total vendido"}));
+    if(totalCol>=0)addRecord({source:"daily_total",sheet:sheetName,metric:"faturamento",unit:"Total",value:totalRow[totalCol],month:monthInfo?.key||"Sem mês",week:"Mês",label:"Total vendido"})
+  }
+  if(metaRow){
+    unitCols.forEach(c=>addRecord({source:"daily_meta",sheet:sheetName,metric:"meta",unit:c.unit,value:metaRow[c.idx],month:monthInfo?.key||"Sem mês",week:"Mês",label:"Meta mensal"}));
+    if(totalCol>=0)addRecord({source:"daily_meta",sheet:sheetName,metric:"meta",unit:"Total",value:metaRow[totalCol],month:monthInfo?.key||"Sem mês",week:"Mês",label:"Meta mensal"})
+  }
+}
+function parseCrossTabSheet(sheetName,matrix){let headerIdx=-1,periodCols=[];for(let i=0;i<matrix.length;i++){const vals=matrix[i];const found=[];vals.forEach((v,idx)=>{const pr=parsePeriodRange(v);if(pr)found.push({idx,...pr})});if(found.length>=3){headerIdx=i;periodCols=found;break}}if(headerIdx<0)return;let currentMetric=null,currentLabel="";for(let i=headerIdx+1;i<matrix.length;i++){const vals=matrix[i];const textCells=vals.map(cellText);const nonEmpty=textCells.filter(Boolean);if(!nonEmpty.length)continue;const c1=textCells[1]||textCells[0]||nonEmpty[0];const metric=metricFromLabel(c1);if(metric&&!isUnit(c1)){currentMetric=metric;currentLabel=c1;continue}if(!currentMetric)continue;const unitCandidate=textCells[1]||textCells[0]||nonEmpty[0];if(!isUnit(unitCandidate))continue;const unit=cleanUnit(unitCandidate);periodCols.forEach(p=>{addRecord({source:"weekly",sheet:sheetName,metric:currentMetric,unit,value:vals[p.idx],start:p.start,end:p.end,month:p.month,week:p.week,label:currentLabel})})}
+}
+function buildFilters(){const unitSel=document.getElementById("unitFilter"),monthSel=document.getElementById("monthFilter"),weekSel=document.getElementById("weekFilter");const old=[unitSel.value,monthSel.value,weekSel.value];unitSel.innerHTML='<option value="">Todas as unidades</option>';[...new Set(records.map(r=>r.unit).filter(u=>u&&u!=="Total"&&u!=="Geral"))].sort().forEach(u=>unitSel.add(new Option(u,u)));if([...unitSel.options].some(o=>o.value===old[0]))unitSel.value=old[0];monthSel.innerHTML='<option value="">Todos os meses</option>';[...new Set(records.map(r=>r.month).filter(m=>m&&m!=="Sem mês"))].sort().forEach(m=>monthSel.add(new Option(monthLabel(m),m)));if([...monthSel.options].some(o=>o.value===old[1]))monthSel.value=old[1];weekSel.innerHTML='<option value="">Todas as semanas</option>';[...new Set(records.map(r=>r.week).filter(w=>w&&w!=="Sem semana"&&w!=="Mês"))].sort().forEach(w=>weekSel.add(new Option(w,w)));if([...weekSel.options].some(o=>o.value===old[2]))weekSel.value=old[2];}
+function filteredRecords(){const unit=document.getElementById("unitFilter").value,month=document.getElementById("monthFilter").value,week=document.getElementById("weekFilter").value,startVal=document.getElementById("startDate").value,endVal=document.getElementById("endDate").value;const start=startVal?new Date(startVal+"T00:00:00Z"):null,end=endVal?new Date(endVal+"T23:59:59Z"):null;return records.filter(r=>{if(unit&&r.unit!==unit)return false;if(month&&r.month!==month)return false;if(week&&r.week!==week)return false;if(start){const d=r.end||r.date||r.start;if(!d||d<start)return false}if(end){const d=r.start||r.date||r.end;if(!d||d>end)return false}return true})}
+function baseMetricRows(rows,metric){return rows.filter(r=>r.metric===metric)}
+function hasManyUnits(rows){return new Set(rows.map(r=>r.unit).filter(u=>u&&u!=="Total"&&u!=="Geral"&&u!=="Média"&&u!=="Media")).size>1}
+function selectBestRows(rows,metric){
+  let arr=baseMetricRows(rows,metric);
+  const many=hasManyUnits(rows);
+  if(metric==="faturamento"){
+    const monthly=arr.filter(r=>r.source==="daily_total");
+    if(monthly.length)arr=monthly; else {const daily=arr.filter(r=>r.source==="daily"); if(daily.length)arr=daily;}
+  }
+  if(metric==="meta"){
+    const monthly=arr.filter(r=>r.source==="daily_meta");
+    if(monthly.length)arr=monthly;
+  }
+  if(many&&arr.some(r=>r.unit==="Total"))return arr.filter(r=>r.unit==="Total");
+  if(many&&arr.some(r=>r.unit==="Média"))return arr.filter(r=>r.unit==="Média");
+  return arr.filter(r=>r.unit!=="Total"&&r.unit!=="Média"&&r.unit!=="Media");
+}
+function metricRows(rows,metric){return selectBestRows(rows,metric)}
+function sum(arr){return arr.reduce((s,r)=>s+(Number(r.value)||0),0)}
+function avg(arr){const vals=arr.map(r=>Number(r.value)||0).filter(v=>v!==0);return vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:0}
+function latest(arr){const vals=arr.filter(r=>Number(r.value)||0).sort((a,b)=>(b.end||b.date||0)-(a.end||a.date||0));return vals.length?Number(vals[0].value)||0:0}
+function aggregate(rows){
+  const rev=sum(metricRows(rows,"faturamento"));
+  const meta=sum(metricRows(rows,"meta"));
+  const pax=sum(metricRows(rows,"pax"));
+  const ticketDirect=avg(metricRows(rows,"ticket"));
+  const ticket=ticketDirect||((rev&&pax)?rev/pax:0);
+  const cmvPct=avg(metricRows(rows,"cmv_pct"))*100;
+  const funcs=avg(metricRows(rows,"funcionarios"));
+  return{rev,meta,pax,ticket,cmvPct,funcs,metaPct:meta?rev/meta*100:0,prod:funcs?rev/funcs:0}
+}
+function reviewAggregate(rows){
+  const g=latest(metricRows(rows,"google_nota"));
+  const ga=latest(metricRows(rows,"google_avaliacoes"));
+  const go=sum(metricRows(rows,"google_ocorrencias"));
+  const t=latest(metricRows(rows,"trip_nota"));
+  const tp=latest(metricRows(rows,"trip_posicao"));
+  const i=latest(metricRows(rows,"ifood_nota"));
+  const io=sum(metricRows(rows,"ifood_ocorrencias"));
+  const q=latest(metricRows(rows,"qualidade"));
+  const nps=latest(metricRows(rows,"nps"));
+  const leads=sum(metricRows(rows,"leads_food_avaliacoes"));
+  return{google:g,googleAvaliacoes:ga,googleOcorrencias:go,trip:t,tripPosicao:tp,ifood:i,ifoodOcorrencias:io,qualidade:q,nps,leads}
+}
+function groupBy(arr,fn){const m=new Map();arr.forEach(x=>{const k=fn(x)||"Sem informação";if(!m.has(k))m.set(k,[]);m.get(k).push(x)});return m}
+function renderAll(){const rows=filteredRecords();renderKpis(rows);renderUnits(rows);renderRanking(rows);renderPeriods(rows);renderReviews(rows);renderAlerts(rows);document.getElementById("debugInfo").textContent=`Base: ${records.length.toLocaleString("pt-BR")} indicadores normalizados • Filtro atual: ${rows.length.toLocaleString("pt-BR")} indicadores`}
+function renderKpis(rows){const a=aggregate(rows);document.getElementById("kpiRevenue").textContent=fmtMoney(a.rev);document.getElementById("kpiGoal").textContent=fmtMoney(a.meta);document.getElementById("kpiGoalPct").textContent=fmtPct(a.metaPct);document.getElementById("kpiPax").textContent=fmtNum(a.pax);document.getElementById("kpiTicket").textContent=fmtMoney(a.ticket);document.getElementById("kpiCmv").textContent=a.cmvPct?fmtPct(a.cmvPct):"-";document.getElementById("kpiRevenueNote").textContent=metricRows(rows,"faturamento").some(r=>r.source==="daily")?"Vendas diárias da planilha":"Indicadores semanais da planilha"}
+function renderUnits(rows){const target=document.getElementById("unitDashboard");const unitNames=[...new Set(rows.map(r=>r.unit).filter(u=>u&&u!=="Total"&&u!=="Geral"&&u!=="Média"))].sort();const groups=unitNames.map(u=>({unit:u,...aggregate(rows.filter(r=>r.unit===u))})).filter(g=>g.rev||g.meta||g.pax).sort((a,b)=>b.rev-a.rev);document.getElementById("unitCount").textContent=groups.length+" unidades";if(!groups.length){target.innerHTML='<div class="empty">Nenhuma unidade encontrada para o filtro atual.</div>';return}const max=Math.max(...groups.map(g=>g.rev),1);target.innerHTML=groups.map(g=>{const pct=Math.max(3,Math.round(g.rev/max*100));const status=g.meta?(g.rev>=g.meta?"good":"bad"):"warn";const label=g.meta?(g.rev>=g.meta?"Meta batida":"Abaixo da meta"):"Sem meta";return `<div class="unitCard"><div class="unitHead"><h3>${escapeHtml(g.unit)}</h3><span class="badge ${status}">${label}</span></div><div class="barWrap"><div class="bar" style="width:${pct}%"></div></div><div class="miniGrid"><div class="mini"><div class="mLabel">Faturamento</div><div class="mValue">${fmtMoney(g.rev)}</div></div><div class="mini"><div class="mLabel">Meta</div><div class="mValue">${fmtMoney(g.meta)}</div></div><div class="mini"><div class="mLabel">Atingimento</div><div class="mValue">${fmtPct(g.metaPct)}</div></div><div class="mini"><div class="mLabel">Ticket médio</div><div class="mValue">${fmtMoney(g.ticket)}</div></div></div><div class="pillRow"><span class="pill">PAX ${fmtNum(g.pax)}</span><span class="pill">CMV ${g.cmvPct?fmtPct(g.cmvPct):"-"}</span></div></div>`}).join("")}
+function renderRanking(rows){const target=document.getElementById("rankingList");const unitNames=[...new Set(rows.map(r=>r.unit).filter(u=>u&&u!=="Total"&&u!=="Geral"&&u!=="Média"))];const groups=unitNames.map(u=>({unit:u,...aggregate(rows.filter(r=>r.unit===u))})).filter(g=>g.rev).sort((a,b)=>b.rev-a.rev).slice(0,8);if(!groups.length){target.innerHTML='<div class="empty">Sem ranking para o filtro atual.</div>';return}const max=Math.max(...groups.map(g=>g.rev),1);target.innerHTML=groups.map((g,i)=>`<div class="rankItem"><div class="rankLine"><div class="rankName">${i+1}. ${escapeHtml(g.unit)}</div><div class="rankValue">${fmtMoney(g.rev)}</div></div><div class="barWrap"><div class="bar green" style="width:${Math.max(3,Math.round(g.rev/max*100))}%"></div></div><div class="pillRow"><span class="pill">${fmtPct(g.metaPct)} da meta</span><span class="pill">TM ${fmtMoney(g.ticket)}</span></div></div>`).join("")}
+function renderPeriods(rows){const target=document.getElementById("periodDashboard");const months=[...groupBy(rows.filter(r=>r.month!=="Sem mês"),r=>r.month).entries()].map(([k,l])=>({kind:"Mês",key:k,label:monthLabel(k),...aggregate(l)}));const weeks=[...groupBy(rows.filter(r=>r.week!=="Sem semana"&&r.week!=="Mês"),r=>r.week).entries()].map(([k,l])=>({kind:"Semana",key:k,label:k,...aggregate(l)}));const groups=[...months.sort((a,b)=>b.key.localeCompare(a.key)).slice(0,6),...weeks.sort((a,b)=>String(b.key).localeCompare(String(a.key))).slice(0,6)];if(!groups.length){target.innerHTML='<div class="empty">Não encontrei períodos reconhecidos. O painel precisa de semanas no formato 05/01 - 11/01 ou abas mensais como Maio/2026.</div>';return}target.innerHTML=groups.map(g=>`<div class="periodCard"><div class="muted">${g.kind}</div><h3>${escapeHtml(g.label)}</h3><div class="value">${fmtMoney(g.rev)}</div><div class="line"><span>Meta</span><b>${fmtMoney(g.meta)}</b></div><div class="line"><span>Atingimento</span><b>${fmtPct(g.metaPct)}</b></div><div class="line"><span>PAX</span><b>${fmtNum(g.pax)}</b></div><div class="line"><span>Ticket médio</span><b>${fmtMoney(g.ticket)}</b></div></div>`).join("")}
+function renderReviews(rows){
+  const kpis=document.getElementById("reviewsKpis");
+  const dash=document.getElementById("reviewsDashboard");
+  const global=reviewAggregate(rows);
+  const hasAny=global.google||global.trip||global.ifood||global.googleAvaliacoes||global.qualidade||global.nps||global.leads;
+  if(!hasAny){
+    kpis.innerHTML='<div class="empty">Não encontrei indicadores de avaliações no filtro atual.</div>';
+    dash.innerHTML='';
+    return;
+  }
+  kpis.innerHTML=`
+    <div class="periodCard"><div class="muted">Google</div><h3>Nota média/latest</h3><div class="value">${global.google?fmtNum(global.google):"-"}</div><div class="line"><span>Avaliações</span><b>${fmtNum(global.googleAvaliacoes)}</b></div><div class="line"><span>Ocorrências</span><b>${fmtNum(global.googleOcorrencias)}</b></div></div>
+    <div class="periodCard"><div class="muted">Trip</div><h3>Nota / posição</h3><div class="value">${global.trip?fmtNum(global.trip):"-"}</div><div class="line"><span>Posição geral</span><b>${global.tripPosicao?fmtNum(global.tripPosicao):"-"}</b></div></div>
+    <div class="periodCard"><div class="muted">iFood</div><h3>Nota / ocorrências</h3><div class="value">${global.ifood?fmtNum(global.ifood):"-"}</div><div class="line"><span>Ocorrências</span><b>${fmtNum(global.ifoodOcorrencias)}</b></div></div>
+    <div class="periodCard"><div class="muted">Qualidade</div><h3>NPS / qualidade</h3><div class="value">${global.qualidade?fmtNum(global.qualidade):global.nps?fmtNum(global.nps):"-"}</div><div class="line"><span>Avaliações Leads Food</span><b>${fmtNum(global.leads)}</b></div></div>`;
+  const unitNames=[...new Set(rows.map(r=>r.unit).filter(u=>u&&u!=="Total"&&u!=="Geral"&&u!=="Média"&&u!=="Media"))].sort();
+  const groups=unitNames.map(u=>({unit:u,...reviewAggregate(rows.filter(r=>r.unit===u))}))
+    .filter(g=>g.google||g.trip||g.ifood||g.googleAvaliacoes||g.qualidade||g.nps||g.leads)
+    .sort((a,b)=>(b.google||0)-(a.google||0));
+  if(!groups.length){dash.innerHTML='<div class="empty">Sem avaliações por unidade no filtro atual.</div>';return}
+  dash.innerHTML=groups.map(g=>{
+    const score=g.google||g.ifood||g.trip||0;
+    const status=score>=4.7?"good":score>=4.5?"warn":"bad";
+    const label=score>=4.7?"Ótima nota":score>=4.5?"Atenção leve":"Atenção";
+    return `<div class="unitCard"><div class="unitHead"><h3>${escapeHtml(g.unit)}</h3><span class="badge ${status}">${label}</span></div><div class="miniGrid"><div class="mini"><div class="mLabel">Google nota</div><div class="mValue">${g.google?fmtNum(g.google):"-"}</div></div><div class="mini"><div class="mLabel">Avaliações Google</div><div class="mValue">${fmtNum(g.googleAvaliacoes)}</div></div><div class="mini"><div class="mLabel">Trip nota</div><div class="mValue">${g.trip?fmtNum(g.trip):"-"}</div></div><div class="mini"><div class="mLabel">iFood nota</div><div class="mValue">${g.ifood?fmtNum(g.ifood):"-"}</div></div></div><div class="pillRow"><span class="pill">Ocorr. Google ${fmtNum(g.googleOcorrencias)}</span><span class="pill">Ocorr. iFood ${fmtNum(g.ifoodOcorrencias)}</span><span class="pill">Qualidade ${g.qualidade?fmtNum(g.qualidade):"-"}</span></div></div>`
+  }).join("")
+}
+function renderAlerts(rows){const target=document.getElementById("alertsDashboard");const unitNames=[...new Set(rows.map(r=>r.unit).filter(u=>u&&u!=="Total"&&u!=="Geral"&&u!=="Média"))];const groups=unitNames.map(u=>({unit:u,...aggregate(rows.filter(r=>r.unit===u))}));const alerts=[];groups.filter(g=>g.meta>0&&g.rev<g.meta).sort((a,b)=>a.metaPct-b.metaPct).slice(0,4).forEach(g=>alerts.push({title:`${g.unit} abaixo da meta`,text:`Realizado ${fmtMoney(g.rev)} de ${fmtMoney(g.meta)} (${fmtPct(g.metaPct)}).`,tag:"Meta"}));groups.filter(g=>g.ticket>0).sort((a,b)=>a.ticket-b.ticket).slice(0,2).forEach(g=>alerts.push({title:`Ticket menor: ${g.unit}`,text:`Ticket médio de ${fmtMoney(g.ticket)} no filtro atual.`,tag:"Ticket"}));const highCmv=groups.filter(g=>g.cmvPct>35).sort((a,b)=>b.cmvPct-a.cmvPct).slice(0,2);highCmv.forEach(g=>alerts.push({title:`CMV alto: ${g.unit}`,text:`CMV médio identificado em ${fmtPct(g.cmvPct)}.`,tag:"CMV"}));if(!alerts.length)alerts.push({title:"Sem alertas críticos",text:"Não encontrei unidades abaixo da meta, ticket crítico ou CMV alto no filtro atual.",tag:"OK"});target.innerHTML=alerts.slice(0,6).map(a=>`<div class="alertCard"><div class="alertTitle">${escapeHtml(a.title)}</div><div class="muted">${escapeHtml(a.text)}</div><div class="pillRow"><span class="pill">${escapeHtml(a.tag)}</span></div></div>`).join("")}
+window.addEventListener("load",()=>{const saved=localStorage.getItem("eatkitchen_api_url")||DEFAULT_URL;if(saved){document.getElementById("apiUrl").value=saved;loadData()}setInterval(loadData,AUTO_REFRESH_MS)});
+</script>
+</body>
+</html>
